@@ -1,80 +1,24 @@
-const maps = [
- {id:"summit",name:"SUMMIT",jp:"サミット",sites:"2 SITE",lanes:"3レーン",desc:"可動式の巨大な壁がラウンド中の戦場を変える高低差のあるマップ。",accent:"#75b8ff",
-  locations:["Base","A Site","B Site","Mid","Market","Courtyard","Tunnel","Training Hall"],roles:{controller:["Omen","Viper"],initiator:["Sova","Sova"],duelist:["Jett","Raze"],sentinel:["Killjoy","Cypher"]}},
- {id:"corrode",name:"CORRODE",jp:"カロード",sites:"2 SITE",lanes:"3レーン",desc:"中世の城下町と採掘施設が融合した、多層構造の3レーンマップ。",accent:"#e6b66d",
-  locations:["A Site","B Site","Mid","Main","Courtyard","Tower","Market","Tunnel"],roles:{controller:["Omen","Viper"],initiator:["Sova","Fade"],duelist:["Raze","Jett"],sentinel:["Cypher","Killjoy"]}},
- {id:"abyss",name:"ABYSS",jp:"アビス",sites:"2 SITE",lanes:"3レーン / 落下",desc:"境界のない足場と落下ポイントを利用した、危険とリターンが大きいマップ。",accent:"#a77cff",
-  locations:["A Site","B Site","A Main","B Main","Mid","Bridge","Canteen","Pit"],roles:{controller:["Omen","Viper"],initiator:["Sova","Gekko"],duelist:["Raze","Jett"],sentinel:["Cypher","Killjoy"]}},
- {id:"sunset",name:"SUNSET",jp:"サンセット",sites:"2 SITE",lanes:"3レーン",desc:"ロサンゼルスの街並みを舞台にした、中央の取り合いが重要なマップ。",accent:"#f29a63",
-  locations:["A Site","B Site","A Main","B Main","Mid","Market","Boba","Courtyard"],roles:{controller:["Omen","Viper"],initiator:["Sova","Gekko"],duelist:["Raze","Neon"],sentinel:["Cypher","Killjoy"]}},
- {id:"lotus",name:"LOTUS",jp:"ロータス",sites:"3 SITE",lanes:"3レーン / 回転扉",desc:"3つのサイトと破壊可能な扉を持つ、ローテーションの判断が重要なマップ。",accent:"#9fd36b",
-  locations:["A Site","B Site","C Site","A Main","B Main","C Main","Tree","Waterfall"],roles:{controller:["Omen","Viper"],initiator:["Fade","Gekko"],duelist:["Raze","Jett"],sentinel:["Killjoy","Cypher"]}},
- {id:"pearl",name:"PEARL",jp:"パール",sites:"2 SITE",lanes:"3レーン",desc:"海中都市を舞台にした、Midの支配と長い射線が特徴のマップ。",accent:"#58d9dc",
-  locations:["A Site","B Site","A Main","B Main","Mid","Art","Flowers","B Link"],roles:{controller:["Omen","Viper"],initiator:["Fade","Sova"],duelist:["Jett","Raze"],sentinel:["Cypher","Killjoy"]}},
- {id:"fracture",name:"FRACTURE",jp:"フラクチャー",sites:"2 SITE",lanes:"4方向アクセス",desc:"両側から挟み込める独特の構造。攻撃・防衛ともに情報管理が重要。",accent:"#d2a36b",
-  locations:["A Site","B Site","A Main","B Main","Dish","Arcade","Rope","Canteen"],roles:{controller:["Brimstone","Viper"],initiator:["Breach","Fade"],duelist:["Raze","Neon"],sentinel:["Killjoy","Cypher"]}},
- {id:"breeze",name:"BREEZE",jp:"ブリーズ",sites:"2 SITE",lanes:"広い射線",desc:"広い空間と長距離戦が特徴。カバーとフランク対策が重要。",accent:"#5fd4ba",
-  locations:["A Site","B Site","A Main","B Main","Mid","Hall","Cave","Nest"],roles:{controller:["Viper","Harbor"],initiator:["Sova","KAY/O"],duelist:["Jett","Neon"],sentinel:["Cypher","Killjoy"]}},
- {id:"icebox",name:"ICEBOX",jp:"アイスボックス",sites:"2 SITE",lanes:"高低差 / ジップ",desc:"水平・垂直方向の移動を活かして戦う極寒の発掘施設。",accent:"#8ecff5",
-  locations:["A Site","B Site","A Main","B Main","Mid","Kitchen","Tube","Yellow"],roles:{controller:["Viper","Harbor"],initiator:["Sova","KAY/O"],duelist:["Jett","Raze"],sentinel:["Killjoy","Sage"]}},
- {id:"ascent",name:"ASCENT",jp:"アセント",sites:"2 SITE",lanes:"中央制圧",desc:"中央エリアの支配とサイト周辺の防衛が勝敗を左右するクラシックなマップ。",accent:"#d9c78a",
-  locations:["A Site","B Site","A Main","B Main","Mid","Market","Tree","Catwalk"],roles:{controller:["Omen","Astra"],initiator:["Sova","KAY/O"],duelist:["Jett","Raze"],sentinel:["Killjoy","Cypher"]}},
- {id:"split",name:"SPLIT",jp:"スプリット",sites:"2 SITE",lanes:"高所 / ロープ",desc:"高低差とチョークポイントを活かした、上下の制圧が重要なマップ。",accent:"#d48ae5",
-  locations:["A Site","B Site","A Main","B Main","Mid","Vent","Heaven","Mail"],roles:{controller:["Omen","Viper"],initiator:["Breach","Gekko"],duelist:["Raze","Jett"],sentinel:["Cypher","Killjoy"]}},
- {id:"haven",name:"HAVEN",jp:"ヘイヴン",sites:"3 SITE",lanes:"3 SITE",desc:"3サイト構成により、防衛側のローテーション判断が問われるマップ。",accent:"#8ca9e9",
-  locations:["A Site","B Site","C Site","A Long","B Main","C Long","Garage","Sewers"],roles:{controller:["Omen","Astra"],initiator:["Sova","Gekko"],duelist:["Jett","Raze"],sentinel:["Cypher","Killjoy"]}},
- {id:"bind",name:"BIND",jp:"バインド",sites:"2 SITE",lanes:"テレポーター",desc:"Midが存在せず、テレポーターによる大胆なローテーションが特徴。",accent:"#e6a16d",
-  locations:["A Site","B Site","A Short","B Long","Hookah","Lamps","Showers","Garden"],roles:{controller:["Brimstone","Viper"],initiator:["Gekko","Sova"],duelist:["Raze","Jett"],sentinel:["Cypher","Killjoy"]}}
+const maps=[
+["bind","バインド","assets/bind.png","テレポーターを活用する2サイト構成。",["Aサイト","Bサイト","Aショート","Bロング","フッカー","ランプ","シャワー","ガーデン"],["レイズ","ジェット","ネオン","ブリムストーン","ヴァイパー","オーメン","ゲッコー","ソーヴァ","フェイド","サイファー","キルジョイ","セージ"]],
+["haven","ヘイヴン","assets/haven.png","3サイト構成でローテーション判断が重要。",["Aサイト","Bサイト","Cサイト","Aロング","Bメイン","Cロング","ガレージ","地下"],["ジェット","レイズ","ネオン","オーメン","アストラ","ヴァイパー","ソーヴァ","ゲッコー","スカイ","サイファー","キルジョイ","セージ"]],
+["split","スプリット","assets/split.png","高低差とロープを活用するマップ。",["Aサイト","Bサイト","ミッド","ベント","メール","ヘブン","Aメイン","Bメイン"],["レイズ","ジェット","ネオン","オーメン","ヴァイパー","アストラ","ブリーチ","ゲッコー","フェイド","サイファー","キルジョイ","セージ"]],
+["ascent","アセント","assets/ascent.png","中央エリアの制圧が重要なマップ。",["Aサイト","Bサイト","中央トップ","ミッド","マーケット","ツリー","Aメイン","Bメイン"],["ジェット","レイズ","フェニックス","オーメン","ブリムストーン","アストラ","ソーヴァ","フェイド","スカイ","キルジョイ","サイファー","セージ"]],
+["icebox","アイスボックス","assets/icebox.png","高低差とジップラインを活用する極寒の施設。",["Aサイト","Bサイト","Aメイン","Bメイン","ミッド","キッチン","チューブ","イエロー"],["ジェット","レイズ","ネオン","ヴァイパー","ハーバー","オーメン","ソーヴァ","ケイ／オー","ゲッコー","キルジョイ","セージ","サイファー"]],
+["breeze","ブリーズ","assets/breeze.png","広い空間と長距離戦が特徴。",["Aサイト","Bサイト","Aメイン","Bメイン","ミッド","ホール","ケイブ","ネスト"],["ジェット","ネオン","レイズ","ヴァイパー","ハーバー","オーメン","ソーヴァ","ケイ／オー","フェイド","サイファー","キルジョイ","チェンバー"]],
+["fracture","フラクチャー","assets/fracture.png","両側から挟み込める独特の構造。",["Aサイト","Bサイト","Aメイン","Bメイン","ディッシュ","アーケード","ロープ","カンティーン"],["レイズ","ネオン","ジェット","ブリムストーン","ヴァイパー","オーメン","ブリーチ","フェイド","ゲッコー","キルジョイ","サイファー","チェンバー"]],
+["pearl","パール","assets/pearl.png","ミッド支配と長い射線が特徴。",["Aサイト","Bサイト","Aメイン","Bメイン","ミッド","アート","フラワーズ","Bリンク"],["ジェット","レイズ","ネオン","オーメン","ヴァイパー","アストラ","フェイド","ソーヴァ","ゲッコー","サイファー","キルジョイ","チェンバー"]],
+["lotus","ロータス","assets/lotus.png","3サイトと回転扉による素早い展開。",["Aサイト","Bサイト","Cサイト","Aメイン","Bメイン","Cメイン","ツリー","ウォーターフォール"],["レイズ","ジェット","ネオン","オーメン","ヴァイパー","アストラ","フェイド","ゲッコー","ソーヴァ","キルジョイ","サイファー","チェンバー"]],
+["sunset","サンセット","assets/sunset.jpg","中央の取り合いとサイト展開が重要。",["Aサイト","Bサイト","Aメイン","Bメイン","ミッド","マーケット","ボバ","コートヤード"],["レイズ","ジェット","ネオン","オーメン","ヴァイパー","ブリムストーン","ソーヴァ","ゲッコー","フェイド","サイファー","キルジョイ","チェンバー"]],
+["abyss","アビス","assets/abyss.png","落下ポイントと高低差を持つマップ。",["Aサイト","Bサイト","Aメイン","Bメイン","ミッド","ブリッジ","カンティーン","ピット"],["レイズ","ジェット","ネオン","オーメン","ヴァイパー","ハーバー","ソーヴァ","ゲッコー","フェイド","サイファー","キルジョイ","チェンバー"]],
+["corrode","カロード","assets/corrode.png","城下町と採掘施設が融合した多層構造。",["Aサイト","Bサイト","ミッド","メイン","コートヤード","タワー","マーケット","トンネル"],["レイズ","ジェット","ネオン","オーメン","ヴァイパー","アストラ","ソーヴァ","フェイド","ゲッコー","サイファー","キルジョイ","チェンバー"]],
+["summit","サミット","assets/summit.png","可動式の壁を備えた高低差のあるマップ。",["Aサイト","Bサイト","ミッド","マーケット","コートヤード","トンネル","トレーニングホール","メイン"],["ジェット","レイズ","ネオン","オーメン","ヴァイパー","アストラ","ソーヴァ","ゲッコー","フェイド","キルジョイ","サイファー","チェンバー"]]
 ];
-
-const content=document.getElementById("appContent"), sideMaps=document.getElementById("sideMaps"), crumb=document.getElementById("crumb");
-const esc=s=>s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
-function renderSide(){
- sideMaps.innerHTML=maps.map(m=>`<a href="#map/${m.id}" class="side-link" data-route="map/${m.id}">${m.jp} <small>${m.name}</small></a>`).join("");
-}
-function layout(){
- const route=location.hash.replace("#","")||"home";
- if(route==="home") renderHome(); else if(route.startsWith("map/")) renderMap(route.split("/")[1]); else renderHome();
- document.querySelectorAll(".side-link").forEach(a=>a.classList.toggle("active",a.dataset.route===route));
-}
-function renderHome(){
- crumb.textContent="HOME";
- content.innerHTML=`<div class="content">
-  <section class="hero">
-   <div class="hero-copy"><div class="eyebrow">TACTICAL MAP REFERENCE</div><h1>MAPS, <em>AT A GLANCE.</em></h1><p>VALORANTのマップ情報を、試合中でも迷わず引き出せるように整理したフィールドガイド。マップ名からエリア、役割別のおすすめエージェントまで、必要な情報へ最短でアクセスできます。</p><div class="quick"><a class="primary" href="#map/ascent">アセントを見る</a><a href="#map/summit">新マップを見る</a></div></div>
-   <div class="hero-card"><div class="eyebrow">QUICK ACCESS</div><h2 style="font-size:28px;margin:10px 0">Choose a map.</h2><p style="color:#7e8794;font-size:11px;max-width:260px;line-height:1.6">左のサイドバー、または下のカードからマップを選択。</p><div class="big-v">V</div></div>
-  </section>
-  <div class="section-head"><h2>MAP SHORTCUTS</h2><span>${maps.length} MAPS</span></div>
-  <div class="map-grid">${maps.map(card).join("")}</div>
- </div>`;
-}
-function card(m){return `<a href="#map/${m.id}" class="map-card" style="--accent:${m.accent}"><div class="map-art"></div><div class="map-card-content"><span class="tag">${m.sites} · ${m.lanes}</span><h3>${m.name}</h3><p>${m.jp} — ${m.desc}</p></div></a>`}
-function renderMap(id){
- const m=maps.find(x=>x.id===id)||maps[0]; crumb.textContent=`MAPS / ${m.name}`;
- content.innerHTML=`<div class="content">
-  <section class="detail-header" style="--accent:${m.accent}">
-   <div class="detail-title"><div><div class="eyebrow">${m.jp}</div><h1>${m.name}</h1><p>${m.desc}</p></div><div class="map-meta"><span class="meta">${m.sites}</span><span class="meta">${m.lanes}</span><span class="meta">MAP GUIDE</span></div></div>
-  </section>
-  <div class="tabs"><button class="tab active" data-tab="overview">OVERVIEW</button><button class="tab" data-tab="locations">LOCATIONS</button><button class="tab" data-tab="agents">AGENTS</button><button class="tab" data-tab="tips">TIPS</button></div>
-  <div id="tabContent"></div>
- </div>`;
- renderTab(m,"overview");
- document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");renderTab(m,t.dataset.tab)});
-}
-function renderTab(m,tab){
- const el=document.getElementById("tabContent");
- if(tab==="overview") el.innerHTML=`<div class="detail-grid"><section class="panel"><h2>MAP AT A GLANCE</h2><div class="locations">${m.locations.slice(0,6).map((x,i)=>`<div class="location"><strong>${x}</strong><span>${i%2?"ROTATION / CONTROL":"KEY AREA"}</span></div>`).join("")}</div></section><section class="panel"><h2>QUICK NOTES</h2><div class="tip">まずは${m.locations[0]}周辺の基本的な射線と退路を覚える。次に${m.locations[2]}へのローテーションを確認すると、実戦で迷いにくい。</div><h3>おすすめの調べ方</h3><p style="font-size:11px;color:#87909d;line-height:1.7">「LOCATIONS」で名称を確認 → 「AGENTS」で役割ごとの候補を見る → 「TIPS」でラウンド中の判断材料を確認。</p></section></div>`;
- if(tab==="locations") el.innerHTML=`<section class="panel"><h2>CALLOUTS / LOCATIONS</h2><div class="locations">${m.locations.map((x,i)=>`<div class="location"><strong>${String(i+1).padStart(2,"0")} · ${x}</strong><span>${i%3===0?"SITE AREA":i%3===1?"CONNECTOR":"MID / CONTROL"}</span></div>`).join("")}</div></section>`;
- if(tab==="agents") el.innerHTML=`<div class="detail-grid">${Object.entries(m.roles).map(([role,agents])=>`<section class="panel"><h2>${role.toUpperCase()}</h2><div class="role-row"><div class="role-icon">${role[0].toUpperCase()}</div><div><strong>${role==="controller"?"視界・進行管理":role==="initiator"?"索敵・エリア確保":role==="duelist"?"エントリー・決定力":"防衛・情報管理"}</strong><span>このマップで検討しやすい候補</span></div></div><div class="agent-list">${agents.map(a=>`<span class="agent">${a}</span>`).join("")}</div></section>`).join("")}</div>`;
- if(tab==="tips") el.innerHTML=`<div class="detail-grid"><section class="panel"><h2>ROUND PLAN</h2><h3>ATTACK</h3><div class="tip">最初からサイトへ突っ込むのではなく、${m.locations[1]}付近の情報を取り、相手の守備配置を見てから人数を寄せる。</div><h3>DEFENSE</h3><div class="tip">序盤に無理なピークをせず、${m.locations[4]}周辺の情報を維持。味方の人数と敵のユーティリティを見てローテーションする。</div></section><section class="panel"><h2>REMEMBER</h2><div class="agent-list"><span class="agent">情報を取る</span><span class="agent">人数を数える</span><span class="agent">退路を残す</span><span class="agent">ローテーションを急がない</span></div></section></div>`;
-}
-renderSide(); layout(); window.addEventListener("hashchange",layout);
-const sidebar=document.getElementById("sidebar"), overlay=document.getElementById("overlay");
-document.getElementById("menuBtn").onclick=()=>{sidebar.classList.add("open");overlay.classList.add("open")};
-document.getElementById("closeSidebar").onclick=()=>{sidebar.classList.remove("open");overlay.classList.remove("open")};
-overlay.onclick=()=>{sidebar.classList.remove("open");overlay.classList.remove("open")};
-document.getElementById("searchBtn").onclick=()=>document.getElementById("searchPanel").classList.toggle("open");
-document.getElementById("searchInput").oninput=e=>{
- const q=e.target.value.toLowerCase().trim();
- document.querySelectorAll(".map-card").forEach(c=>c.style.display=c.textContent.toLowerCase().includes(q)?"":"none");
-};
+const V=document.getElementById("view"),N=document.getElementById("nav");
+N.innerHTML=maps.map(m=>`<a href="#map/${m[0]}">◈　${m[1]}</a>`).join("");
+const card=m=>`<a class="card" href="#map/${m[0]}"><div class="pic"><img src="${m[2]}" alt="${m[1]}"></div><div class="info"><h3>${m[1]} <span style="float:right">›</span></h3></div></a>`;
+function home(){V.innerHTML=`<div class="page"><section class="hero"><img src="${maps[0][2]}"><div class="copy"><div class="eyebrow">VALORANT MAP GUIDE</div><h1>マップを知る。<br>それが勝利への近道。</h1><p>VALORANTのマップ情報、コールアウト、役割別のおすすめエージェントを、試合中でも確認しやすい形に整理した攻略ガイド。</p></div></section><div class="head"><div><h2>マップ一覧</h2><span>全${maps.length}マップ</span></div><div class="filters"><button class="filter active">すべて</button><button class="filter">デフォルト</button><button class="filter">コンペティティブ</button><button class="filter">スイフトプレイ</button></div></div><div class="grid">${maps.map(card).join("")}</div></div>`}
+function detail(id){let m=maps.find(x=>x[0]===id)||maps[0];V.innerHTML=`<div class="page"><section class="detailHero"><img src="${m[2]}"><div class="copy"><div class="eyebrow">マップ</div><h1>${m[1]}</h1><p>${m[4]}</p></div></section><div class="tabs"><button class="tab active" data-t="o">概要</button><button class="tab" data-t="l">ロケーション</button><button class="tab" data-t="a">おすすめエージェント</button><button class="tab" data-t="p">攻略のコツ</button></div><div id="body"></div></div>`;render("o",m);document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");render(b.dataset.t,m)})}
+function render(t,m){let b=document.getElementById("body");if(t==="o")b.innerHTML=`<div class="cols"><section class="panel"><h2>マップ概要</h2><div class="locs">${m[5].map((x,i)=>`<div class="loc"><b>${x}</b><small>${i<2?"サイト":"重要エリア"}</small></div>`).join("")}</div></section><section class="panel"><h2>このマップのポイント</h2><div class="note">まず重要エリアの情報を取り、味方と一緒に人数差を作る。無理なピークより、次の判断をしやすい位置を確保しよう。</div></section></div>`;if(t==="l")b.innerHTML=`<div class="location-layout"><section class="panel"><h2>ロケーション / コールアウト</h2>${m[0]==="bind"?`<img class="callout-map" src="assets/bind-callouts.jpg" alt="バインドのマップ内名称">`:``}<div class="locs">${m[5].map((x,i)=>`<div class="loc"><b>${String(i+1).padStart(2,"0")}　${x}</b><small>主要コールアウト</small></div>`).join("")}</div></section>${m[0]==="bind"?`<section class="panel"><h2>バインドの基本</h2><div class="note">ミッドがなく、2つのテレポーターで離れたエリアを一気に移動できるのが特徴。A側はAショートとシャワー、B側はBロングとフッカー周辺の主導権が重要。</div><div class="source-note">基本情報：指定された攻略サイトをもとに整理</div></section>`:``}</div>`;if(t==="a")b.innerHTML=`<div class="cols"><section class="panel"><h2>おすすめエージェント</h2><div class="agents">${m[6].map(x=>`<span class="agent">${x}</span>`).join("")}</div></section><section class="panel"><h2>役割</h2><div class="note">この一覧は候補を素早く確認するためのもの。実際の採用はチーム構成とプレイスタイルに合わせて判断。</div></section></div>`;if(t==="p")b.innerHTML=`<div class="cols"><section class="panel"><h2>攻略のコツ</h2><h3>攻撃</h3><div class="note">重要エリアの情報を取って相手の配置を確認し、人数を寄せてからエントリー。</div><h3>防衛</h3><div class="note">序盤は無理に前へ出ず、情報共有を優先。敵の人数とユーティリティを見てローテーション。</div></section><section class="panel"><h2>覚えること</h2><div class="agents"><span class="agent">情報</span><span class="agent">人数</span><span class="agent">退路</span><span class="agent">ローテーション</span></div></section></div>`}
+function route(){let h=location.hash.slice(1)||"home";h==="home"?home():h.startsWith("map/")?detail(h.split("/")[1]):home();window.scrollTo(0,0)}route();addEventListener("hashchange",route);
+const side=document.getElementById("side"),ov=document.getElementById("overlay");document.getElementById("open").onclick=()=>{side.classList.add("open");ov.classList.add("open")};document.getElementById("close").onclick=()=>{side.classList.remove("open");ov.classList.remove("open")};ov.onclick=()=>{side.classList.remove("open");ov.classList.remove("open")};
+const si=document.getElementById("search"),rs=document.getElementById("results");si.oninput=()=>{let q=si.value.trim().toLowerCase();if(!q){rs.style.display="none";return}let h=maps.filter(m=>(m[1]+m[4]+m[5].join("")+m[6].join("")).toLowerCase().includes(q));rs.innerHTML=h.map(m=>`<a class="result" href="#map/${m[0]}"><b>${m[1]}</b>　${m[4]}</a>`).join("")||'<div class="result">見つかりませんでした</div>';rs.style.display="block"};
